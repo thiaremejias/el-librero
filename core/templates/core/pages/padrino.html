@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{%block css%}
+    <link rel="stylesheet" href="{% static 'css/pages_style.css' %}">
+{%endblock%}
+
+{% block navbar%}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index'%}">Inicio</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'agregar-pelicula' %}">Agregar película</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">User: {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registro-usuario' %}">Registrarse</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block contenido %}
+    <!--Header-->
+    <header>
+        <div class="container mazos">
+            <h1 class="text-center display-4">El Padrino</h1>
+            <hr>
+        </div>
+    </header>
+    <section class="container mt-4" id="cartelera">
+        <section id="izquierda">
+            <div class="caratula">
+                <img src="{% static 'img/godfather.jpg'%}" alt="memento" id="memento" class="card-img-top">
+                <div class="card-body ">
+                    <h4 class="card-title">Título: El Padrino</h4>
+                    <h4 class="card-title">Autor: Mario Puzo </h4>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="container mt-4" id="sinopsis">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Reseña</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="sinopsis">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h3>
+                            La publicación de El Padrino en 1969 supuso una convulsión en el mundo literario. Por primera vez, la Mafia protagonizaba una novela y era retratada desde dentro con acierto y verosimilitud. Mario Puzo la presentaba no como una mera asociación de facinerosos, sino como una compleja sociedad con una cultura propia y una jerarquía aceptada incluso más allá de los círculos de delincuencia. El Padrino narra la historia de un hombre: Vito Corleone, el capo más respetado de Nueva York. Déspota benevolente, implacable con sus rivales, inteligente, astuto y fiel a los principios del honor y la amistad, Don Corleone dirige un emporio que abarca el fraude y la extorsión, los juegos de azar y el control de los sindicatos. La vida y negocios de Don Corleone, así como los de su hijo y heredero Michael, conforman el eje de esta magistral obra. Con El Padrino, Mario Puzo partió de la realidad y consiguió crear un género. La Mafia pasó a ser tema central de centenares de novelas y películas, aunque ninguna de ellas ha alcanzado el nivel de la obra que las inspiró.
+                    </p>
+                    </h3>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4 mb-3" id="criticas">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Críticas</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="critica">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h5>
+                            El libro te atrapa, la narrativa es fluida. Me encantó en todo aspecto, detalles desarrollo de personajes, trama, una obra maestra
+                        </h5>
+                    </p>
+                    <p>
+                        <h6 style="color: green">Ximena Beltrán: Lectora</h6>
+                        <br>
+                    </p>
+                </div>
+                <div class="critica">
+                    <p style="color: rgb(24, 23, 23)">
+                        <h5>El primer libro que leo de Puzo y la primera historia que leo sobre mafias. He de decir que me ha sorprendido, el Padrino te absorbe desde las primeras páginas, la forma de narrar de Pozo ha sido de mi gusto, descripciones cortas, dando la información necesaria para que el lector se adentre en la familia del gran Padrino, buenos personajes, especialmente interesantes los papeles de las mujeres. Lectura recomendada.</h5>
+                    </p>
+                    <p>
+                        <h6 style="color: green">Margareth Socías: Lectora </h6>
+                    </p>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+        <a href="{% url 'index' %}" class="btn btn-primary">Volver</a>
+    </section>
+{% endblock %}

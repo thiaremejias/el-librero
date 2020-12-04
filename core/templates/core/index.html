@@ -1,0 +1,476 @@
+{% extends 'core/base.html'%}
+
+{% load static%}
+
+{% block navbar %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Inicio</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#sobrenosotros">Sobre nosotros</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#clasicos">Nuestra selección</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#curiosidades">Biografías</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'agregar-pelicula' %}">Añadir libro</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'listado-peliculas' %}">Mis libros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'recomendaciones' %}">Recomendaciones</a>
+            </li>
+            {% if request.user.groups.all.0.name == 'Mantenedor' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">User: {{ user.username }}</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'perfil' %}">User: {{ user.username }}</a>
+                </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registro-usuario' %}">Registrarse</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block contenido %}
+
+    <!--Header-->
+    <header>
+        <div class="container">
+            <h1 class="text-center display-4">El librero</h1>
+            <hr>
+        </div>
+    </header>
+    <!--Carrousel-->
+    <section class="carousel text-white bg-carousel d-none d-md-block">
+        <h2 class="text-center pt-3">Los más solicitados</h2>
+        <hr>
+        <div class="py-5 container">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div class="controles">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel" data-slide-to="1"></li>
+                    </ol>
+                </div>
+
+                <div class="carousel-inner">
+                    <!--primera pagina carrusel-->
+                    <div class="carousel-item active">
+                        <div class="row" style="align-content: space-between">
+
+                            <div class="col-3">
+                                <a href="{% url 'factotum'%}">
+                                    <img src="{% static 'img/factotum.jpg' %}" class="d-block carousel-img" alt="matrix-cartel"></a>
+                            </div>
+                            <div class="col-3">
+                                <a href="{% url 'padrino'%}">
+                                    <img src="{% static 'img/godfather.jpg' %}" class="d-block carousel-img" alt="memento-cartel"></a>
+                            </div>
+                            <div class="col-3">
+                                <a href="{% url 'borges'%}"><img src="{% static 'img/borges1.jpg' %}"
+                                        class="d-block carousel-img" alt="pulpfiction-cartel"></a>
+                            </div>
+                            <div class="col-3">
+                                    <a href="{% url 'torero'%}">
+                                <img src="{% static 'img/lemebel1.jpg' %}" class="d-block carousel-img" alt="requiemforadream-cartel">
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--segunda pagina carrusel-->
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="{% static 'img/1984.jpeg' %}" class="d-block carousel-img" alt="taxidriver-cartel">
+                            </div>
+                            <div class="col-3">
+                                <img src="{% static 'img/mundofeliz.jpg' %}" class="d-block carousel-img" alt="thegodfather-cartel">
+                            </div>
+                            <div class="col-3">
+                                <img src="{% static 'img/amorentiempos.jpg' %}" class="d-block carousel-img" alt="machinist-cartel">
+                            </div>
+                            <div class="col-3">
+                                <img src="{% static 'img/socio.jpg' %}" class="d-block carousel-img" alt="shining">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--sobre nosotros-->
+    <section id="sobrenosotros" class="parallax" data-parallax="scroll" data-z-index="1"
+        data-image-src="{% static 'img/fondo2.jpg' %}">
+        <div class="container text-center">
+            <div class="pt-5 pb-4">
+                <h2 class="sobrenosotros">Sobre nosotros</h2>
+                <hr class="sobrenosotros">
+            </div>
+            <div class="row text-left pb-5 contenido">
+                <div class="col-md-6">
+                    <p class="sobrenosotros">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ante
+                        nulla. Donec in neque consectetur, ultrices justo eu, hendrerit lectus. Nullam fermentum turpis
+                        et dolor euismod consequat sed sed ante. Curabitur vel lacinia nisi. Sed mollis condimentum
+                        rhoncus. Proin sed diam eu risus auctor aliquet. Sed nisi lorem, mollis sit amet gravida in,
+                        finibus ut diam. Nunc cursus lacus ex, id interdum nibh tristique ac. Maecenas in mi blandit,
+                        euismod ipsum eu, lobortis nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                        Mauris ultricies sem eu massa pellentesque, id interdum nibh luctus. Nam ac orci id neque
+                        posuere aliquam.</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="sobrenosotros">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ante
+                        nulla. Donec in neque consectetur, ultrices justo eu, hendrerit lectus. Nullam fermentum turpis
+                        et dolor euismod consequat sed sed ante. Curabitur vel lacinia nisi. Sed mollis condimentum
+                        rhoncus. Proin sed diam eu risus auctor aliquet. Sed nisi lorem, mollis sit amet gravida in,
+                        finibus ut diam. Nunc cursus lacus ex, id interdum nibh tristique ac. Maecenas in mi blandit,
+                        euismod ipsum eu, lobortis nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                        Mauris ultricies sem eu massa pellentesque, id interdum nibh luctus. Nam ac orci id neque
+                        posuere aliquam.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--clasicos-->
+    <section id="clasicos" class="container shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="container text-center pt-3">
+            <h2>Nuestra selección</h2>
+            <hr style="background-color: black;
+            height: 1px;
+            width: 10%;">
+        </div>
+
+        
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/baradit1.jpg' %}" class="card-img-top" alt="fightclub">
+                    <div class="card-body ">
+                        <h6 class="card-title">Título: Historia Secreta de Chile</h6>
+                        <h6 class="card-title">Autor: Jorge Baradit</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#fightclub">Sinopsis</a>
+                    </div>
+                </div>
+                <!--card-->
+                <div class="card mtop-5" style="width: 18rem;">
+                    <img src="{% static 'img/aliens.jpg' %}" class="card-img-top" alt="psycho">
+                    <div class="card-body">
+                        <h6 class="card-title">Título: Alienígenas Chilenos</h6>
+                        <h6 class="card-title">Autor: Francisco Ortega</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#psycho">Sinopsis</a>
+                    </div>
+                </div>
+                <!--card-->
+                <div class="card mtop-5" style="width: 18rem;">
+                    <img src="{% static 'img/mujeres.jpg' %}" class="card-img-top" alt="sinaliento">
+                    <div class="card-body ">
+                        <h6 class="card-title">Título: Mujeres</h6>
+                        <h6 class="card-title">Autor: Charles Bukowski</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#escapada">Sinopsis</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--segundo deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/ggmarquez.jpg' %}" class="card-img-top" alt="persona">
+                    <div class="card-body">
+                        <h6 class="card-title">Título: Crónica de una muerte anunciada</h6>
+                        <h6 class="card-title">Autor: G. G. Márquez</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#persona">Sinopsis</a>
+                    </div>
+                </div>
+                <!--card-->
+                <div class="card mtop-5" style="width: 18rem;">
+                    <img src="{% static 'img/carretera.jpg' %}" class="card-img-top" alt="moodforlove">
+                    <div class="card-body">
+                        <h6 class="card-title">Título: La Carretera</h6>
+                        <h6 class="card-title">Autor: Cormac McCarthy</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#moodforlove">Sinopsis</a>
+                    </div>
+                </div>
+                <!--card-->
+                <div class="card mtop-5" style="width: 18rem;">
+                    <img src="{% static 'img/frank.jpg' %}" class="card-img-top" alt="hombreelefante">
+                    <div class="card-body">
+                        <h6 class="card-title">Título: El Hombre En Busca De Sentido</h6>
+                        <h6 class="card-title">Autor: Viktor Frankl</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#elephantman">Sinopsis</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Modales Recomendaciones-->
+    <div class="modales">
+        <div class="modal fade" id="fightclub" tabindex="-1" role="dialog" aria-labelledby="fightclub"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblfightclub">Historia secreta de Chile</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/baradit1.jpg' %}" class="card-img-top" alt="fightclub">
+                        <p class="pt-4">"¿Crees que conoces el país donde naciste?" Es un libro de no-ficción que explora pasajes desconocidos de nuestra historia nacional, arrojando luces a esos rincones oscuros de nuestro timeline nacional. Situaciones extremas, bizarras, iluminadoras. Lugares exiliados de nuestra memoria por su inconveniencia o incomodidad.</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="psycho" tabindex="-1" role="dialog" aria-labelledby="psycho" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblpsycho">Alienigenias chilenos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/aliens.jpg' %}" class="card-img-top" alt="psycho">
+                        <p class="pt-4">Francisco Ortega (1974) es autor de la Trilogía de los Césares (Planeta, 2006-2016). También de la novela Salisbury (Planeta, 2017) y de la serie de aventuras infantiles Max Urdemales (Planeta Lector, 2015-2018). Es coautor, junto a Nelson Dániel, de las novelas gráficas Metahulla: 1899 y 1959; y junto a Gonzalo Martínez de Mocha Dick y Alex Nemo y la Hermandad del Nautilus (2017).
+
+                        En 2018, publicó Dioses chilenos, una antología de no ficción que repasa los mitos y leyendas de Chile. Junto al dibujante Félix Vega prepara una biografía gráfica de Augusto Pinochet. También colabora en diversos medios y escribe guiones de cine y TV.</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="escapada" tabindex="-1" role="dialog" aria-labelledby="lblsinaliento"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblsinaliento">Mujeres</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/mujeres.jpg' %}" class="card-img-top" alt="sinaliento">
+                        <p class="pt-4">En Mujeres, una de las más aclamadas novelas de Bukowski, su alter ego Henry Chinaski, el "viejo indecente", un perdedor nato, se encuentra a los cincuenta años con una creciente reputación literaria, algún dinero en el banco y mujeres: montañas de mujeres. Se le ofrecen en los recitales de poesía, le escriben cartas procaces, le telefonean sin cesar. Y Chinaski las quiere todas, quiere desquitarse de su largos años de forzadas abstinencias. Y, a la vez, este gigantesco maratón sexual es un proceso de aprendizaje, de conocimiento, en el que Bukowskino escatima sarcásticas observaciones sobre sí mismo, y en el que en el machismo de textos anteriores queda seriamente erosionado. Todo ello unido a incontables borracheras: el alcohol en tanto que mecanismo que le permite seguir viviendo, a la par que le destruye. Bukowski parece sugerir que las alternativas -es decir, una carrera más respetable, literaria o la que fuere- son aún más deshumanizadas. "Mujeres parece una historia sobre sexo y borracheras, cuando en realidad es un poema sobre el amor y el dolor" "Su prosa es el resultado de un arte que opera por sustracción, no por acumulación... No hay nunca una palabra de más, eliminable o sustituible" </p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="persona" tabindex="-1" role="dialog" aria-labelledby="lblpersona"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblpersona">Crónica de una muerte anunciada</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/ggmarquez.jpg' %}" class="card-img-top" alt="persona">
+                        <p class="pt-4">Acaso sea Crónica de una muerte anunciada la obra más «realista» de Gabriel García Márquez, pues se basa en un hecho histórico acontecido en la tierra natal de escritor. Cuando empieza la novela, ya se saber que los hermanos Vicario van a matara a Santiago Nasar -de hecho ya le han matado- para vengar el honor ultrajado de su hermana Ángela, pero el relato termina precisamente en el momento en que Santiago Nasar. El tiempo cíclico, tan utilizado por García Márquez en sus obras, reaparece aquí minuciosamente descompuesto en cada uno de sus momentos, reconstruido prolija y exactamente por el narrador, que va dando cuenta de lo que sucedió mucho tiempo atrás, que avanza y retrocede en su relato y hasta llega mucho tiempo después para contar el destino de los supervivientes. La acción es, a un tiempo, colectiva y personal, clara y ambigua, y atrapa al lector desde un principio, a pesar de que conoce el desenlace de la trama. La dialéctica entre mito y realidad se ve potenciada aquí, una vez más, por una prosa tan cargada de fascinación que las eleva hasta las fronteras de la leyenda.</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="moodforlove" tabindex="-1" role="dialog" aria-labelledby="lblmood"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblmood">La Carretera</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/inthemoodforlove.jpg' %}" class="card-img-top" alt="moodforlove">
+                        <p class="pt-4">Inquietante y lúcida, la última novela del gran Cormac McCarthy tiene como escenario un terreno baldío, un páramo carbonizado que es lo único que queda de lo que alguna vez fue Norteamérica. Ya no existe más vida sobre la tierra que la humana y los hombres se comen los unos a los otros. Un padre y su hijo recorren este mundo apocalíptico sin saber cuál es su destino. El protagonista recuerda los viejos tiempos, pero no sabe con certeza si esa memoria no es más que un mito, una necesidad de crear una historia fundacional que dé sentido a la desolación que le rodea. Una demoledora fábula sobre el futuro del ser humano, destinada a convertirse en la obra maestra del autor. La novela ha sido adaptada al cine por el director australiano John Hillcoat con Viggo Mortensen y Charlize Theron como protagonistas principales.</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="elephantman" tabindex="-1" role="dialog" aria-labelledby="lblelephant"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblelephant">El Hombre En Busca De Sentido</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/hombreelefante.jpg' %}" class="card-img-top" alt="hombreelefante">
+                        <p class="pt-4">El doctor Frankl, psiquiatra y escritor, suele preguntar a sus pacientes aquejados de múltiples padecimientos: «¿Por qué no se suicida usted? Y muchas veces, de las respuestas extrae una orientación para la psicoterapia a aplicar: a éste, lo que le ata a la vida son los hijos; al otro, un talento, una habilidad sin explotar; a un tercero, quizás, sólo unos cuantos recuerdos que merece la pena rescatar del olvido. Tejer estas tenues hebras de vidas rotas en una urdimbre firme, coherente, significativa y responsable es el objeto con que se enfrenta la logoterapia.
+
+                        En esta obra, Viktor E. Frankl explica la experiencia que le llevó al descubrimiento de la logoterapia. Prisionero, durante mucho tiempo, en los desalmados campos de concentración, él mismo sintió en su propio ser lo que significaba una existencia desnuda. ¿Cómo pudo él que todo lo había perdido, que había visto destruir todo lo que valía la pena, que padeció hambre, frío, brutalidades sin fin, que tantas veces estuvo a punto del exterminio, cómo pudo aceptar que la vida fuera digna de vivirla? El psiquiatra que personalmente ha tenido que enfrentarse a tales rigores merece que se le escuche, pues nadie como él para juzgar nuestra condición humana sabia y compasivamente. Las palabras del doctor Frankl alcanzan un temple sorprendentemente esperanzador sobre la capacidad humana de trascender sus dificultades y descubrir la verdad conveniente y orientadora.
+
+ </p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Curiosidades de cine-->
+    <section class="container mt-4 shadow-lg p-3 mb-5 bg-white rounded" id="curiosidades">
+        <div class="text-center py-4">
+            <h2>Biografías</h2>
+            <hr>
+            <h4 class="curiosidades">Conoce todo sobre los personajes mundiales más relevantes de ayer y hoy.</h4>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/davinci.jpg' %}" class="card-img-top" alt="clockworkorange">
+                    <div class="card-body ">
+                        <h6 class="card-title">Título: Da Vinci, La biografía</h6>
+                        <h6 class="card-title">Autor: Walter Isaacson</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal"
+                            data-target="#clockworkorange">Sobre Da Vinci</a>
+                    </div>
+                </div>
+                <!--card-->
+                <div class="card mtop-5" style="width: 18rem;">
+                    <img src="{% static 'img/chrchill.jpg' %}" class="card-img-top" alt="donniedarko">
+                    <div class="card-body">
+                        <h6 class="card-title">Título: Churchill, La biografía</h6>
+                        <h6 class="card-title">Autor: Andrew Roberts</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal"
+                            data-target="#donniedarko">Sobre Churchill</a>
+                    </div>
+                </div>
+                <!--card-->
+                <div class="card mtop-5" style="width: 18rem;">
+                    <img src="{% static 'img/dylan.jpg' %}" class="card-img-top" alt="godfather">
+                    <div class="card-body ">
+                        <h6 class="card-title">Título: Bob Dylan, La biografía</h6>
+                        <h6 class="card-title">Autor: Howard Sounes</h6>
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#padrino">Sobre Bob Dylan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Modales curiosidades-->
+    <section class="modales">
+        <div class="modal fade" id="clockworkorange" tabindex="-1" role="dialog" aria-labelledby="lblorange"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblorange">Da Vinci</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/davinci.jpg' %}" class="card-img-top" alt="clockworkorange">
+                        <h3 class="pt-4">¿Quién fue?</h3>
+                        <p>Considerado el paradigma del homo universalis, del sabio renacentista versado en todos los ámbitos del conocimiento humano, Leonardo da Vinci (1452-1519) incursionó en campos tan variados como la aerodinámica, la hidráulica, la anatomía, la botánica, la pintura, la escultura y la arquitectura, entre otros. Sus investigaciones científicas fueron, en gran medida, olvidadas y minusvaloradas por sus contemporáneos; su producción pictórica, en cambio, fue de inmediato reconocida como la de un maestro capaz de materializar el ideal de belleza en obras de turbadora sugestión y delicada poesía.</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="donniedarko" tabindex="-1" role="dialog" aria-labelledby="lbldonniedarko"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lbldonniedarko">Churchill</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/chrchill.jpg' %}" class="card-img-top" alt="donniedarko">
+                        <h3 class="pt-4">¿Quién fue?</h3>
+                        <p>(Sir Winston Leonard Spencer Churchill; Blenheim Palace, Oxfordshire, 1874 - Londres, 1965) Político británico especialmente recordado por su mandato como primer ministro (1940-45) durante la Segunda Guerra Mundial: con su divisa "sangre, sudor y lágrimas", logró elevar la moral de las tropas y de la población civil y sostener la nación hasta la victoria aliada.</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="padrino" tabindex="-1" role="dialog" aria-labelledby="lblgodfather"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lblgodfather">Bob Dylan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{% static 'img/dylan.jpg' %}" class="card-img-top" alt="godfather">
+                        <h3 class="pt-4">¿Quién fue?</h3>
+                        <p>(Robert Allen Zimmerman; Duluth, Estados Unidos, 1941) Cantante y compositor estadounidense de folk y rock, una de las grandes figuras de la música contemporánea, cuya producción musical lo erigió en un referente entre los cantautores. Su admiración por el poeta Dylan Thomas le llevó a adoptar el apellido artístico por el que se hizo popular.</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

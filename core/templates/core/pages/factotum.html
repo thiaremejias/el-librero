@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block css%}
+    <link rel="stylesheet" href="{% static 'css/pages_style.css'%}">
+{% endblock %}
+
+{% block navbar%}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index'%}">Inicio</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'agregar-pelicula' %}">Agregar película</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">User: {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registro-usuario' %}">Registrarse</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block contenido %}
+
+    <!--Header-->
+    <header>
+        <div class="container mazos">
+            <h1 class="text-center display-4">Factotum</h1>
+            <hr>
+        </div>
+    </header>
+    <section class="container mt-4" id="cartelera">
+        <section id="izquierda">
+            <div class="caratula">
+                <img src="{% static 'img/factotum.jpg' %}" alt="matrix" id="matrix" class="card-img-top">
+                <div class="card-body ">
+                    <h4 class="card-title">Título: Factotum</h4>
+                    <h4 class="card-title">Autor:Charles Bukowski </h4>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="container mt-4" id="sinopsis">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Reseña</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="sinopsis">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h3>
+                            En esta novela autobiográfica de sus años de juventud, el autor nos describe la vida de su alter ego Henry Chinaski saltando de un empleo a otro, todos sórdidos, duros, sin sentido, emborrachándose a muerte, con la obsesión de follar, intentando materializar su vida de escritor y nos ofrece una visión brutalmente divertida y melancólicamente horrorizada de la ética del trabajo, de cómo doblega el «alma» de los hombres. Se ha dicho que Bukowski con su prosa lacónica, escueta y contundente como un uppercut es el novelista atroz de la gran selva urbana, de los desheredados, las prostitutas, los borrachos, los desechos humanos del Sueño Americano a nivel del arroyo, y se le ha comparado con Henry Miller, Céline y Hemingway. La obra fue adaptada al cine por Bent Hamer con Matt Dillon como protagonista, la película no está basada totalmente en la novela Factotum sino que se nutre de la misma y de otros cuentos de Charles Bukowski para componer la historia.
+                    </p>
+                    </h3>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4 mb-3" id="criticas">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Críticas</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="critica">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h5>
+                            Básicamente nos encontramos con un informe de la vida laboral de Chinaski/Bukowski durante su juventud. Hay muchísimos trabajos, y muy variados. Es interesante adentrarse en esas empresas y en ese mundo laboral que, en general, resulta un tanto deprimente. Aparte de eso, nos encontramos con escenas sexuales, alcohólicas e incluso escatológicas descritas sin tapujos. Hay momentos de profundidad, y también algunas escenas y sobre todo algunos diálogos brillantes. La prosa está bien, siendo sobria y directa. Ni es Nabokov ni Steinbeck, pero tampoco lo pretende. A mi juicio, la novela pierde interés y personalidad en la parte final, cuando se convierte demasiado en ese informe de una vida laboral. Pero en cualquier caso, me parece una buena novela.
+                        </h5>
+                    </p>
+                    <p>
+                        <h6 style="color: green">Alberto Ferrada: Lector</h6>
+                        <br>
+                    </p>
+                </div>
+                <div class="critica">
+                    <p style="color: rgb(24, 23, 23)">
+                        <h5>"Tras Cartero, donde Bukowski -o su alter ego- tiene un trabajo medianamente estable, en Factotum sigue sus andanzas, si cabe, todavía más bohemias, con sus breves pluriempleos y su liberación nocturna mediante el sexo y la bebida, así como sus primeros pinitos como escritor. Muy similar al resto de la serie Chinaski que ponen al autor en la primera línea del realismo sucio americano.</h5>
+                    </p>
+                    <p>
+                        <h6 style="color: green">Jordi Busquets: Lector</h6>
+                    </p>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+        <a href="{% url 'index' %}" class="btn btn-primary">Volver</a>
+    </section>
+
+{% endblock %}

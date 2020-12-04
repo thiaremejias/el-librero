@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/pages_style.css'%}">
+{% endblock %}
+
+{% block navbar%}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index'%}">Inicio</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'agregar-pelicula' %}">Agregar película</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">User: {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registro-usuario' %}">Registrarse</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block contenido %}
+    <!--Header-->
+    <header>
+        <div class="container mazos">
+            <h1 class="text-center display-4">Tengo miedo torero</h1>
+            <hr>
+        </div>
+    </header>
+    <section class="container mt-4" id="cartelera">
+        <section id="izquierda">
+            <div class="caratula">
+                <img src="{% static 'img/lemebel1.jpg' %}" alt="requiem" id="requiem" class="card-img-top">
+                <div class="card-body ">
+                    <h4 class="card-title">Título: Tengo miedo torero</h4>
+                    <h4 class="card-title">Autor: Pedro Lemebel</h4>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="container mt-4" id="sinopsis">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Reseña</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="sinopsis">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h3>
+                            Este libro cuenta una historia de amor en el Santiago del 86, el año del atentado a Pinochet. Un muchacho del Frente Patriótico Manuel Rodríguez, que va a participar el la acción, vive una relación sentimental con un gay. Pero la acción fracasa y acaba también la relación. En el escenario del año que pudo ser decisivo pero no lo fue, en el que se mueven una serie de personajes entre lo carnavalesco y lo desolador.
+                    </p>
+                    </h3>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4 mb-3" id="criticas">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Críticas</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="critica">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h5>
+                            Un buen libro, aunque debo reconocer que la historia se disfruta más si se ha vivido en el país y en la época en que se desarrollan los acontecimientos, ya que se alude a temas asociados a realidades muy profundas de la vida cultural, social y política del Chile de los '80. Independiente de lo anterior, es una lectura fresca, escrita con bastante ironía y sarcasmo. Es además, un libro tierno, divertido y siempre intenso.
+                        </h5>
+                    </p>
+                    <p>
+                        <h6 style="color: green">Beatriz Vidal: Lectora</h6>
+                        <br>
+                    </p>
+                </div>
+                <div class="critica">
+                    <p style="color: rgb(24, 23, 23)">
+                        <h5>Es un libro intenso, tierno, conmovedor y profundo,escrito con la original prosa de Lemebel , autentico, deslenguado, voraz.Absolutamente recomendable.</h5>
+                    </p>
+                    <p>
+                        <h6 style="color: green">María Canobra: Lectora </h6>
+                    </p>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+        <a href="{% url 'index'%}" class="btn btn-primary">Volver</a>
+    </section>
+{% endblock %}

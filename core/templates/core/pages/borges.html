@@ -1,0 +1,102 @@
+{% extends 'core/base.html'%}
+
+{% load static%}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/pages_style.css'%}">
+{% endblock %}
+
+{% block navbar%}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index'%}">Inicio</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'agregar-pelicula' %}">Agregar película</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">User: {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registro-usuario' %}">Registrarse</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block contenido %}
+    <!--Header-->
+    <header>
+        <div class="container mazos">
+            <h1 class="text-center display-4">Libro de Sueños</h1>
+            <hr>
+        </div>
+    </header>
+    <section class="container mt-4" id="cartelera">
+        <section id="izquierda">
+            <div class="caratula">
+                <img src="{% static 'img/borges1.jpg'%}" alt="pulpfiction" id="pulpfiction" class="card-img-top">
+                <div class="card-body ">
+                    <h4 class="card-title">Título: Libro de sueños</h4>
+                    <h4 class="card-title">Autor: Jorge Luis Borges </h4>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="container mt-4" id="sinopsis">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Sinopsis</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="sinopsis">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h3>
+                            Si en «El libro de los seres imaginarios» Jorge Luis Borges puso su vasta cultura y asombrosa erudición al servicio de la elaboración de una especie de bestiario moderno, la recopilación de sueños y pesadillas que da cuerpo a esta obra es producto de una recurrente inquietud -atestiguada a lo largo de su vida por numerosos relatos, ensayos y conferencias- por ese ámbito misterioso en el que el alma humana «es a la vez el teatro, los actores y el auditorio». «Este LIBRO DE SUEÑOS que los lectores volverán a soñar abarca sueños de la noche -los que yo firmo, por ejemplo-, sueños del día, que son un ejercicio voluntario de nuestra mente, y otros de raigambre perdida: digamos, el Sueño anglosajón de la Cruz».
+                    </p>
+                    </h3>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-4 mb-3" id="criticas">
+        <div class="text-center py-4">
+            <hr>
+            <h2 style="color: brown">Críticas</h2>
+        </div>
+
+        <div class="container mazos">
+            <!--primer deck-->
+            <div class="card-deck pb-5">
+                <!--card-->
+                <div class="critica">
+                    <p class="text-center py-4" style="color: rgb(24, 23, 23)">
+                        <h5>
+                            Hasta ahora, nunca un libro del gran maestro había bajado del 9. Justamente ese es el problema, que no es del gran maestro, lo compiló Roy Bartholomew, supongo uno de sus colaboradores. Los cuentos de Borges son impresionantes, que no quepa duda, pero ¿hojas completas con tanto catolicismo? Siempre el equilibro borgeano con la religión fue de lo mejor, esto es sin dudas un exceso (lo atribuyo a su avanzada edad, o a su completa inobservancia, ergo: por algo se le encomienda algo a alguien, para no hacerlo). En fin, no ha sido el mejor libro, pero, por supu
+                        </h5>
+                    </p>
+                    <p>
+                        <h6 style="color: green">Pablo Kurt: Lector</h6>
+                        <br>
+                    </p>
+                </div>
+                <!--card-->
+            </div>
+        </div>
+        <a href="{% url 'index'%}" class="btn btn-primary">Volver</a>
+    </section>
+{% endblock %}
